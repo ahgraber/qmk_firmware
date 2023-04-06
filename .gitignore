@@ -4,6 +4,9 @@
 *~
 .DS_Store
 ._*
+*.profraw
+.env
+.envrc
 
 # Merge files
 *.orig
