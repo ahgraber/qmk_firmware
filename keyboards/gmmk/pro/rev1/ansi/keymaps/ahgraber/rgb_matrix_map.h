@@ -35,7 +35,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #ifdef RGB_MATRIX_ENABLE
 
-    // RGB LED locations
+    // RGB LED locations (in index order)
     enum led_location_map {
         LED_ESC,   // 0, ESC, k13
         LED_GRV,   // 1, ~, k16

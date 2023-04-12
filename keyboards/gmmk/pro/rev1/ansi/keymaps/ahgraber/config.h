@@ -28,26 +28,13 @@
 // #define USB_MAX_POWER_CONSUMPTION 500
 // #define RGB_MATRIX_MAXIMUM_BRIGHTNESS 255
 
-// At the time of this, there are 41 effects! That may be a bit too many to cycle through - keeping what I believe is the best.
+// Below added per: https://beta.docs.qmk.fm/using-qmk/hardware-features/lighting/feature_rgb_matrix#suspended-state-id-suspended-state
+#define RGB_DISABLE_WHEN_USB_SUSPENDED
+
 #ifdef RGB_MATRIX_ENABLE
-
-    // Below added per: https://beta.docs.qmk.fm/using-qmk/hardware-features/lighting/feature_rgb_matrix#suspended-state-id-suspended-state
-    #define RGB_DISABLE_WHEN_USB_SUSPENDED
-
     // Effects
     #define RGB_MATRIX_FRAMEBUFFER_EFFECTS   // Enables Heatmap, Rain
     #define RGB_MATRIX_KEYPRESSES            // Enables REACTIVE & SPLASH modes
-
-    // Default/Startup values if none set
-    // #define RGB_MATRIX_MAXIMUM_BRIGHTNESS 200 // limits maximum brightness of LEDs to 200 out of 255. If not defined maximum brightness is set to 255
-    // #define RGB_MATRIX_DEFAULT_MODE RGB_MATRIX_NONE // Sets the default mode, if none has been set
-    // #define RGB_MATRIX_DEFAULT_MODE RGB_MATRIX_SOLID_COLOR // Sets the default mode, if none has been set
-    // #define RGB_MATRIX_DEFAULT_MODE RGB_MATRIX_SPLASH // Sets the default mode, if none has been set
-    // #define RGB_MATRIX_DEFAULT_HUE 0 // Sets the default hue value, if none has been set
-    // #define RGB_MATRIX_DEFAULT_SAT 255 // Sets the default saturation value, if none has been set
-    // #define RGB_MATRIX_DEFAULT_VAL RGB_MATRIX_MAXIMUM_BRIGHTNESS // Sets the default brightness value, if none has been set
-    // #define RGB_MATRIX_DEFAULT_SPD 0 // Sets the default animation speed, if none has been set
-
 
     // ref: https://docs.qmk.fm/#/feature_rgb_matrix
     // Uncomment any #undef line below to turn OFF any default enabled RGB background effect (enabled in keyboards/gmmk/pro/config.h).
