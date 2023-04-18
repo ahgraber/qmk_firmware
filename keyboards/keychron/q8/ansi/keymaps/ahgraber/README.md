@@ -35,7 +35,7 @@ brew install qmk/qmk/qmk
 
 ## Compile
 
-ex: GMMK Pro v1 ansi
+ex: KeyChron Q8 ANSI
 
 ```sh
 KEYBOARD='keychron/q8/ansi'

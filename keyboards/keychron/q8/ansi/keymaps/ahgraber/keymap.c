@@ -17,6 +17,7 @@
 #include QMK_KEYBOARD_H
 #include "rgb_matrix_map.h"
 
+
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // mac
@@ -51,10 +52,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_ESC,  TO(0),   TO(1),   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          EE_CLR,
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______,
         _______, _______, _______, _______, _______, _______,          _______, _______, _______, _______, _______, _______, _______,          _______,
-        _______,          _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+        _______,          _______, _______, _______, _______, _______, _______, NK_TOGG, _______, _______, _______, _______, _______, _______,
         _______, _______, QK_BOOT,          _______,          _______, _______,          _______,          QK_BOOT,          _______, _______, _______
     ),
 
+};
+
+// Define key overrides
+const key_override_t mac_esc_override = ko_make_with_layers(MOD_MASK_GUI, KC_GRV, KC_ESC, 1);  // Cmd + GRV = ESC
+const key_override_t win_esc_override = ko_make_with_layers(MOD_MASK_CTRL, KC_GRV, KC_ESC, 2);  // Ctrl + GRV = ESC
+const key_override_t **key_overrides = (const key_override_t *[]){
+    &mac_esc_override,
+    &win_esc_override,
+    NULL
 };
 
 
@@ -119,6 +129,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                 // set reset options to blue
                 rgb_matrix_set_color(60, 0, 0, 255); // L CMD / L CTRL / 60
                 rgb_matrix_set_color(65, 0, 0, 255); // R CMD / RGUI / 65
+                // set nkro to yellow
+                rgb_matrix_set_color(LED_N, 255, 225, 0); // N / 51
                 break;
 
             default:
