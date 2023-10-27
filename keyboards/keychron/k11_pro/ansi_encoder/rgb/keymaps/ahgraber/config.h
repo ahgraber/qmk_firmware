@@ -19,42 +19,52 @@
 /* COL2ROW or ROW2COL */
 #define DIODE_DIRECTION ROW2COL
 
-/* Key matrix pins */
-#define MATRIX_ROW_PINS \
-    { B4, B3, A15, A14, A13 }
-#define MATRIX_COL_PINS \
-    { C14, C15, A0, A1, A2, A3, A4, A5, A6, A7, B0, B1, A8, A9, H3 }
+// /* Key matrix pins */
+// #define MATRIX_ROW_PINS { B4, B3, A15, A14, A13 }
+// #define MATRIX_COL_PINS { C14, C15, A0, A1, A2, A3, A4, A5, A6, A7, B0, B1, A8, A9, H3 }
 
-/* If PH3 used with a stronger pull resistor then the following definition needs be included */
+// /* If PH3 used with a stronger pull resistor then the following definition needs be included */
 // #define MATRIX_UNSELECT_DRIVE_HIGH
 
-/* RGB Matrix Driver Configuration */
-#define DRIVER_COUNT 2
-#define DRIVER_ADDR_1 0b1110111
-#define DRIVER_ADDR_2 0b1110100
+// /* RGB Matrix Driver Configuration */
+// #define DRIVER_COUNT 2
+// #define DRIVER_ADDR_1 0b1110111
+// #define DRIVER_ADDR_2 0b1110100
 
-/* Increase I2C speed to 1000 KHz */
-#define I2C1_TIMINGR_PRESC 0U
-#define I2C1_TIMINGR_SCLDEL 3U
-#define I2C1_TIMINGR_SDADEL 0U
-#define I2C1_TIMINGR_SCLH 15U
-#define I2C1_TIMINGR_SCLL 51U
+// /* Increase I2C speed to 1000 KHz */
+// #define I2C1_TIMINGR_PRESC 0U
+// #define I2C1_TIMINGR_SCLDEL 3U
+// #define I2C1_TIMINGR_SDADEL 0U
+// #define I2C1_TIMINGR_SCLH 15U
+// #define I2C1_TIMINGR_SCLL 51U
 
-/* Scan phase of led driver set as MSKPHASE_9CHANNEL(defined as 0x03 in CKLED2001.h) */
-#define PHASE_CHANNEL MSKPHASE_9CHANNEL
-#define CKLED2001_CURRENT_TUNE \
-    { 0xC4, 0xC4, 0x60, 0xC4, 0xC4, 0x60, 0xC4, 0xC4, 0x60, 0xC4, 0xC4, 0x60 }
+// /* Scan phase of led driver set as MSKPHASE_9CHANNEL(defined as 0x03 in CKLED2001.h) */
+// #define PHASE_CHANNEL MSKPHASE_9CHANNEL
+// #define CKLED2001_CURRENT_TUNE { 0xC4, 0xC4, 0x60, 0xC4, 0xC4, 0x60, 0xC4, 0xC4, 0x60, 0xC4, 0xC4, 0x60 }
 
-/* DIP switch */
-#define DIP_SWITCH_MATRIX_GRID  { {4, 4} }
+// /* DIP switch */
+// #define DIP_SWITCH_MATRIX_GRID  { {4, 4} }
 
-/* Disable DIP switch in matrix data */
-#define MATRIX_MASKED
+// /* Disable DIP switch in matrix data */
+// #define MATRIX_MASKED
 
 /* EEPROM Driver Configuration */
 #define WEAR_LEVELING_LOGICAL_SIZE 2048
 #define WEAR_LEVELING_BACKING_SIZE (WEAR_LEVELING_LOGICAL_SIZE * 2)
 #define DYNAMIC_KEYMAP_LAYER_COUNT 5
+
+#ifdef MOUSEKEY_ENABLE
+    // #define MOUSEKEY_DELAY             5  // Delay between pressing a movement key and cursor movement
+    // #define MOUSEKEY_INTERVAL          5  // Time between cursor movements in milliseconds
+    // #define MOUSEKEY_MOVE_DELTA        8  // Step size
+    // #define MOUSEKEY_MAX_SPEED         3  // Maximum cursor speed at which acceleration stops
+    // #define MOUSEKEY_TIME_TO_MAX       20 // Time until maximum cursor speed is reached
+    #define MOUSEKEY_WHEEL_DELAY       5  // Delay between pressing a wheel key and wheel movement
+    #define MOUSEKEY_WHEEL_INTERVAL    5  // Time between wheel movements
+    #define MOUSEKEY_WHEEL_DELTA       3  // Wheel movement step size
+    #define MOUSEKEY_WHEEL_MAX_SPEED   15 // Maximum number of scroll steps per scroll action
+    #define MOUSEKEY_WHEEL_TIME_TO_MAX 10 // Time until maximum scroll speed is reached
+#endif //MOUSEKEY_ENABLE
 
 /* Turn off effects when suspended */
 #define RGB_DISABLE_WHEN_USB_SUSPENDED

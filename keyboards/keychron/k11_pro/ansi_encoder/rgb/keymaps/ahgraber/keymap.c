@@ -15,7 +15,7 @@
  */
 
 #include QMK_KEYBOARD_H
-// #include "rgb_matrix_map.h"
+#include "rgb_matrix_map.h"
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -66,13 +66,12 @@ const key_override_t **key_overrides = (const key_override_t *[]){
     NULL
 };
 
-
 #ifdef ENCODER_ENABLE
     bool encoder_update_user(uint8_t index, bool clockwise) {
         if (clockwise) {
-        tap_code(KC_MS_WH_DOWN);
-        } else {
         tap_code(KC_MS_WH_UP);
+        } else {
+        tap_code(KC_MS_WH_DOWN);
         }
         //return true; //set to return false to counteract enabled encoder in pro.c
         return false;
