@@ -28,7 +28,7 @@
         LED_MINS,   // 11 -
         LED_EQL,    // 12 =
         LED_BSPC,   // 13 DEL
-        // LED_DEL,    // 14 TAB
+        LED_ROTARY, // 14 TAB  // ROTARY does not have LED
         LED_TAB,    // 15  S
         LED_Q,      // 16 Q
         LED_W,      // 17 W
