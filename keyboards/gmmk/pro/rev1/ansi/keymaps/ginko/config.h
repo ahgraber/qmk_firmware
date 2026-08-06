@@ -31,11 +31,15 @@
 // RGB off while USB suspended: keyboard-level "rgb_matrix.sleep": true already covers this
 
 // Mint-green breathing as the default effect (applies on fresh EEPROM / after Fn+Esc).
-// Mint #98FF98 in QMK's 0-255 HSV scale: hue 85 (green), low saturation for the pastel tone.
+// The global HSV drives the per-key LEDs, which shine through cyan-tinted switch
+// housings — so it is deliberately warmer (less blue, more saturated) than true mint
+// to come out mint-looking. The side strips get their own uncorrected mint in keymap.c.
 #define RGB_MATRIX_DEFAULT_MODE RGB_MATRIX_BREATHING
-#define RGB_MATRIX_DEFAULT_HUE 85
-#define RGB_MATRIX_DEFAULT_SAT 105
+#define RGB_MATRIX_DEFAULT_HUE 56  // yellow-green; reads as mint through the cyan filter
+#define RGB_MATRIX_DEFAULT_SAT 180 // higher sat: the white in pastel goes cyan through the filter
 #define RGB_MATRIX_DEFAULT_VAL 200
+// Breathing cycle ~= 131s / (SPD/4 + 1): stock 127 ~4s, 64 ~7.7s, 32 ~14.6s, 16 ~26s
+#define RGB_MATRIX_DEFAULT_SPD 32 // very zen: ~4 breaths per minute
 
 #ifdef RGB_MATRIX_ENABLE
     // Effects

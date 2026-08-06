@@ -16,6 +16,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include QMK_KEYBOARD_H
 #include "rgb_matrix_map.h"
+#include "lib/lib8tion/lib8tion.h"
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -56,10 +57,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
     // Layer 2: Fn layer — Fn+1/Fn+2 pick the Windows/Mac base, Fn+Del enters the bootloader,
-    // Fn+Esc resets EEPROM, Fn+Up/Down adjust RGB brightness.
+    // Fn+Esc resets EEPROM, Fn+minus/plus (or Fn+Up/Down) adjust RGB brightness.
     [2] = LAYOUT(
         EE_CLR,  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, QK_BOOT,          _______,
-        _______, TO(0),   TO(1),   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______,
+        _______, TO(0),   TO(1),   _______, _______, _______, _______, _______, _______, _______, _______, RM_VALD, RM_VALU, _______,          _______,
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______,
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______,          _______,
         _______,          _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______, RM_VALU, _______,
@@ -98,6 +99,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     #define RGB_GRASS  0x4C, 0xBB, 0x17 // layer indicator — swap for RGB_FOREST to compare
     #define RGB_FOREST 0x22, 0x8B, 0x22
 
+    // Side strips have no cyan switch housing in front of them, so they get true
+    // mint instead of the warmed-up global color (see config.h). Hue 80 is a touch
+    // less blue than classic mint #98FF98 (hue 85).
+    #define SIDE_MINT_HUE 80
+    #define SIDE_MINT_SAT 125
+
     static void set_alpha_color(uint8_t r, uint8_t g, uint8_t b) {
         for (int i = 0; i < 26; i++) {
             rgb_matrix_set_color(LED_LIST_ALPHA[i], r, g, b);
@@ -115,6 +122,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
         // No set_color_all() here: the mint-green breathing effect (defaults in
         // config.h) stays visible underneath these indicator overrides.
+
+        // Side strips: true mint, breathing in phase with the global effect
+        // (same time/value math as quantum/rgb_matrix/animations/breathing_anim.h).
+        if (rgb_matrix_get_mode() == RGB_MATRIX_BREATHING) {
+            uint8_t time = scale16by8(g_rgb_timer, qadd8(rgb_matrix_config.speed / 4, 1));
+            uint8_t val  = scale8(abs8(sin8(time / 2) - 128) * 2, rgb_matrix_config.hsv.v);
+            rgb_t mint   = hsv_to_rgb((hsv_t){SIDE_MINT_HUE, SIDE_MINT_SAT, val});
+            set_sidelights_color(mint.r, mint.g, mint.b);
+        }
 
         // CapsLock: alphas + side strips go gold
         if (host_keyboard_led_state().caps_lock) {

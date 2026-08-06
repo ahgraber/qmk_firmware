@@ -18,7 +18,8 @@ tweaks: standard bottom rows, no WASD highlight.
 | ---- | ------ |
 | `Fn + 1` | switch to Windows layer |
 | `Fn + 2` | switch to Mac layer |
-| `Fn + Up` / `Fn + Down` | RGB brightness up / down |
+| `Fn + =` / `Fn + -` | RGB brightness up / down |
+| `Fn + Up` / `Fn + Down` | RGB brightness up / down (same) |
 | `Fn + N` | toggle NKRO / 6KRO (persists; use if a KVM/BIOS misbehaves) |
 | `Fn + Del` | enter bootloader (for flashing) |
 | `Fn + Esc` | reset EEPROM (clears saved settings) |
