@@ -94,6 +94,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 #ifdef RGB_MATRIX_ENABLE
 
+    // Theme colors (r, g, b). RGB_GOLD comes from quantum/color.h (0xFF, 0xD9, 0x00).
+    #define RGB_GRASS  0x4C, 0xBB, 0x17 // layer indicator — swap for RGB_FOREST to compare
+    #define RGB_FOREST 0x22, 0x8B, 0x22
+
     static void set_alpha_color(uint8_t r, uint8_t g, uint8_t b) {
         for (int i = 0; i < 26; i++) {
             rgb_matrix_set_color(LED_LIST_ALPHA[i], r, g, b);
@@ -109,35 +113,36 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     // ref: https://www.reddit.com/r/glorious/comments/okrbjg/peeps_qmk_and_via_rgb_guide_only_for_ansi/
     bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
-        rgb_matrix_set_color_all(RGB_OFF); // Default startup colour
+        // No set_color_all() here: the mint-green breathing effect (defaults in
+        // config.h) stays visible underneath these indicator overrides.
 
-        // CapsLock RGB setup
+        // CapsLock: alphas + side strips go gold
         if (host_keyboard_led_state().caps_lock) {
-            rgb_matrix_set_color(LED_CAPS, 225, 0, 0);
-            set_sidelights_color(225,0,0);
-            set_alpha_color(225,0,0);
+            rgb_matrix_set_color(LED_CAPS, RGB_GOLD);
+            set_sidelights_color(RGB_GOLD);
+            set_alpha_color(RGB_GOLD);
         }
 
         // special per layer handling
         switch(get_highest_layer(layer_state)){
-            case 1: // mac layer: light the "2" key gold
-                rgb_matrix_set_color(LED_2, 255, 225, 0);
+            case 1: // mac layer: light the "2" key
+                rgb_matrix_set_color(LED_2, RGB_GRASS);
                 break;
 
             case 2: // fn/meta layer
-                // set layer options to red
-                rgb_matrix_set_color(LED_1, 225, 0, 0);
-                rgb_matrix_set_color(LED_2, 225, 0, 0);
+                // set layer options to gold
+                rgb_matrix_set_color(LED_1, RGB_GOLD);
+                rgb_matrix_set_color(LED_2, RGB_GOLD);
                 // set eeprom_reset to green
                 rgb_matrix_set_color(LED_ESC, 0, 255, 10);
                 // set reset options to blue
                 rgb_matrix_set_color(LED_PRT, 0, 0, 255); // (DEL on this board)
                 // set fn to gold
-                rgb_matrix_set_color(LED_FN, 255, 225, 0);
+                rgb_matrix_set_color(LED_FN, RGB_GOLD);
                 break;
 
-            default: // windows base layer: light the "1" key gold
-                rgb_matrix_set_color(LED_1, 255, 225, 0);
+            default: // windows base layer: light the "1" key
+                rgb_matrix_set_color(LED_1, RGB_GRASS);
                 break;
         }
         return false;

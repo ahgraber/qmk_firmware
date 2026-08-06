@@ -30,6 +30,13 @@
 
 // RGB off while USB suspended: keyboard-level "rgb_matrix.sleep": true already covers this
 
+// Mint-green breathing as the default effect (applies on fresh EEPROM / after Fn+Esc).
+// Mint #98FF98 in QMK's 0-255 HSV scale: hue 85 (green), low saturation for the pastel tone.
+#define RGB_MATRIX_DEFAULT_MODE RGB_MATRIX_BREATHING
+#define RGB_MATRIX_DEFAULT_HUE 85
+#define RGB_MATRIX_DEFAULT_SAT 105
+#define RGB_MATRIX_DEFAULT_VAL 200
+
 #ifdef RGB_MATRIX_ENABLE
     // Effects
     #define RGB_MATRIX_FRAMEBUFFER_EFFECTS   // Enables Heatmap, Rain

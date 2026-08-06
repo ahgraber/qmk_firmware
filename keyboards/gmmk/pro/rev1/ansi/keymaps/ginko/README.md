@@ -23,11 +23,13 @@ tweaks: standard bottom rows, no WASD highlight.
 | `Fn + Del` | enter bootloader (for flashing) |
 | `Fn + Esc` | reset EEPROM (clears saved settings) |
 
-## Indicator lighting
+## Lighting
 
-* **Caps Lock on:** alphas + side strips turn red.
-* **Base layer indicator:** `1` key lit gold on Windows layer, `2` key lit gold on Mac layer.
-* **Fn held:** highlights the active shortcut keys (`1`/`2` red, `Esc` green, `Del` blue, `Fn` gold).
+* **Base:** mint-green breathing across the whole matrix, side strips included
+  (default effect; applies on fresh EEPROM or after `Fn + Esc`).
+* **Caps Lock on:** alphas + side strips turn gold.
+* **Base layer indicator:** `1` key lit grass green on Windows layer, `2` key on Mac layer.
+* **Fn held:** highlights the active shortcut keys (`1`/`2` gold, `Esc` green, `Del` blue, `Fn` gold).
 * Rotary encoder: volume up/down, press to mute.
 
 ## Build
